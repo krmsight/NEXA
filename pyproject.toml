@@ -1,0 +1,24 @@
+[project]
+name = "nexa"
+version = "1.0.0"
+description = "NEXA — Neural EXecution Agent. A real-time AI agent capable of executing actions through natural language using MCP."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp",
+    "httpx",
+    "livekit-agents[deepgram,groq,openai,silero]>=1.5.1",
+    "livekit-plugins-google>=1.5.1",
+    "python-dotenv",
+]
+
+[project.scripts]
+nexa       = "server:main"        # Start the MCP server (SSE on :8000)
+nexa_voice = "agent_nexa:dev"     # Start the LiveKit voice agent
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["server.py", "nexa"]
